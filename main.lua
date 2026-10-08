@@ -177,32 +177,6 @@ local function serverCall(path, body)
 
     return false, (decoded and decoded.error) or "unauthorized"
 end
-    local req = getRequest()
-    if not req then return false, "executor does not provide HTTP requests" end
-    local ok, res = pcall(req, {
-        Url = API_URL .. path,
-        Method = "POST",
-        Headers = { ["Content-Type"] = "application/json" },
-        Body = HttpService:JSONEncode(body),
-    })
-    if not ok or not res then return false, "request failed" end
-    local statusCode = res.StatusCode or res.Status or 0
-    local decoded = nil
-    pcall(function() decoded = HttpService:JSONDecode(res.Body or "{}") end)
-    if statusCode >= 200 and statusCode < 300 and decoded then return true, decoded end
-    return false, (decoded and decoded.error) or "unauthorized"
-end
-
-local function finish()
-    unlocked = true
-    gui:Destroy()
-end
-
-local function authenticateToken(token)
-    local ok, data = serverCall("/auth", { token = token })
-    if ok and data.ok then return true end
-    return false
-end
 
 local ok, data = serverCall("", {
     key = key,
