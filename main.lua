@@ -1,106 +1,3 @@
--- Lightning Redeemer - clean key gate
-local VALID_KEYS = {
-    ['HICtkOmwjjRn-hFfwfyoURsHY-u4u18KhYiJQP'] = true,
-    ['CLwsVxodHw6A-ypHXlVI4gB6W-7RXFAeynpxkt'] = true,
-    ['WuiugmBZcW0t-IxzkLoqTZykY-sK5KPka8nuMB'] = true,
-    ['9u42D1ZZAbHY-1TjPadRi0dvj-QunIGaj6Taba'] = true,
-    ['s0NcHph9jidV-i5yl6rDcgjHb-kE3SekfUWj6c'] = true,
-    ['jFuoUnj0xuqd-nxpJ6wg6OBWE-Srr6FUrQNJoo'] = true,
-    ['fDU7y1KNj0gP-K0GhLMVCY0sU-Z3DYwBNkiY5Q'] = true,
-    ['o00l5oHuWb9Y-ZMFLk1ljJ4V9-5NNzA8LKLCbv'] = true,
-    ['ZHg3y8TEHY1F-GUQLBqrmwT5q-oXOiE8Ek0Yeg'] = true,
-    ['NFE2w08CbQ5g-DZtk5hRZ3vnz-BBK2cL9sUXfa'] = true,
-    ['ZENL6EBxaNil-poIhi1PxOy4X-qrRmw6WqKci2'] = true,
-    ['0EC4BTJmJgHQ-iItlCoemlB6r-j1kcgQXhDsbj'] = true,
-    ['0zNGkyyPigtb-e0hBcjqj7OEK-9vVbPlUFp1cn'] = true,
-    ['UhElNARS9Ehg-eipTA0pZWKlA-7PG0p8fU83Zc'] = true,
-    ['zhdxz6qlLNtp-Hn2eP003puLo-DdIfmgLHdRaI'] = true,
-    ['TbPeaLOYQESz-yNo3R1ij9P60-CymGM70g7Ohm'] = true,
-    ['rIrCySIrTFWz-rkdhtT97TWZx-p1kQDyI4adJa'] = true,
-    ['YcjEyhgkBbY5-hIH2PIbgp04a-npjfCGBZWnRA'] = true,
-    ['lVWgucv8Kdj2-OB6FEeceXkDC-tms4al3kJLn9'] = true,
-    ['8KlTayUwY3Ck-nDWcMtrLsLqv-peHhlrCx8Vco'] = true,
-    ['0se1JNG6c9tc-aSBCGghunLtA-9bWlmMWLuG6O'] = true,
-    ['SyXJFXtNQklh-GPdLYRysbM8V-KVc1j0j3OmTA'] = true,
-    ['QR28vwJJFBxz-7XkG5tkKp4QM-0R7GKfWbOFCs'] = true,
-    ['4GTdR8eqYiyW-ESMgZg3cubs5-PJy0kuprVF8y'] = true,
-    ['pc6dUs2Tev6Y-WJfRm8HEtYYV-RzGcPgusU7CB'] = true,
-    ['ctFTEwmKcxgZ-ph4VxhvfQssQ-wsPTB82NgdDV'] = true,
-    ['PnCKX3hDxrmI-DCwHsRmYGxsD-7bkFWfU7lNTp'] = true,
-    ['w6YRLVXMQhRe-XJejZTJG0kVV-ZKye5zUMZglP'] = true,
-    ['fzBBAqhsoQG0-DvCmV2YpOu3I-ZKW7Uyinf90U'] = true,
-    ['zfUVM6U02t0J-lXHeFkrul2kQ-wsJnTmYdft3h'] = true,
-    ['ZH9QsH34YxvB-hiWyunF0vptW-9MwBhI3oIg6p'] = true,
-    ['vg0BimPqDBrN-LtT5ccJZ7mwm-aAx5G1r1lbFQ'] = true,
-    ['LhR2aZYrQ409-67JPwZ5jynNR-Tazrtxd52PLq'] = true,
-    ['mtCmlXT9NM58-qsZIxljtw8UL-MCBt9zcaP0RI'] = true,
-    ['yyrZVS11qq5h-C7BSidd9sDgl-kRYfwbh2YEST'] = true,
-    ['yipLkHr0dG79-7TCC1cz4JDO4-zKWhytY7oysR'] = true,
-    ['ferZaU9N7vOQ-vI8cG6TEe4e7-HU95wTGOC5qL'] = true,
-    ['MiYknFpzgd6R-5G6taZ8n42bY-7SWZDln24N4P'] = true,
-    ['vgpItAVrXm9l-l7Q7i2BPfPMc-fXUIKXZWHSaf'] = true,
-    ['pd7mXMys5i3n-LR142KRxnWW3-jFmVGYvvzuUe'] = true,
-    ['Wp5ODW6QFw3E-t5RsvPoFDUhY-QxuDnsaJCtyE'] = true,
-    ['LSuuj6LbLc6O-H1A69xvOCfpD-rb0A00KufSHH'] = true,
-    ['2SfLylerKvHl-jBpxnmzLU9Zw-ispLpHT58zP6'] = true,
-    ['XCc8VOP1Lvzm-pNhc3e32Ftkx-ZUZlYjqjGrZq'] = true,
-    ['I95d7EUpMaL1-bwVPxN4zrjvz-QbNxG7LZOFqG'] = true,
-    ['5b8aWs9iCYn6-ZdcpuV6RqUuL-KXTGpT9OMxiY'] = true,
-    ['2z3xl16LnQtx-ip9nK5g2EKzC-OpQOvYlE1bNm'] = true,
-    ['SiqMu9062EuX-3ZU6YM87utWV-jE2pOUpvLzXp'] = true,
-    ['D6KwZ73pQJce-CbS24aeotOR2-5V5S9Nkdcoy0'] = true,
-    ['Mfo1LMBaDL4E-cLxmyKXmUUKI-dRZKFG1uFcd2'] = true,
-    ['06Qvac5n3Cts-xa2wYc5OH1Nc-jEBPjX8VFdFR'] = true,
-    ['0INrft3dMzzS-uZtNzypgkwBs-tit9QDZCR7o5'] = true,
-    ['6ouuKukE8HdN-7rOO4ALgqkTj-6H70sVaC3Lfp'] = true,
-    ['NGDNlvLxLdPv-jY13UMADOgkw-OLLerGl56ywi'] = true,
-    ['97b4UhMHWiHe-w5kvO5mHmnwZ-RVRY4MT8oA4B'] = true,
-    ['6ojEFGs1YcUH-HC6yJ7MNJDH9-Dx0HBW6hlFMO'] = true,
-    ['kN9ZsDXtmCbx-219nM5M8yYQX-YuMvo773h8jS'] = true,
-    ['7KmpuXCgdkGv-gkADsqoFROPu-2kV4U5VNP5ak'] = true,
-    ['gXb3k3zIDyXV-q8w9xoFrwWlu-jU7cuWfWQS1y'] = true,
-    ['MUWAA3HS1knl-KxYtCDJvz4BB-KPCMHdcJfs75'] = true,
-    ['QCunaX4O1xnR-P8i8SwJcXzP8-sKlrzMnN6QWE'] = true,
-    ['q5CXWKZ4ahor-PW666K1smKqT-MVCTiUsZkWug'] = true,
-    ['sZb1UxNbri8C-hySTvMVZWwXc-cH3wHQ1WNGlm'] = true,
-    ['04bEEIQcANUQ-LIE6hvoX2RF0-Gg7chPrmUS29'] = true,
-    ['5SBLo0Kta8RX-qPzlGLmtGFx0-ScnRWC4WzsBo'] = true,
-    ['pczKMj2IMRzo-T0KUi2NHvaHi-0cfJzGD05CRZ'] = true,
-    ['tVgaitTkuBFa-5e7BD7PyweFq-F6bV20h2MbJL'] = true,
-    ['PSkGYknCi2wB-W2v8VrR6y30I-1pP9OvAHq7Tu'] = true,
-    ['cUe2gUitmECZ-luj5jCGZ9vsZ-IIqTRGperUvO'] = true,
-    ['w2HAS80xJNWL-uX8Rx3sZorsY-9YCzAQNs8m4a'] = true,
-    ['WuQ4JZ7H4g4n-3T8Y7CEQm35u-FXdrZnuV4oQQ'] = true,
-    ['wNEbAnhbNCxT-VyUieprP1ira-GPJuHtpcR3Sr'] = true,
-    ['9zjQITuQwZd3-bOaqoFQDcxey-n4qCoCWkh1Td'] = true,
-    ['KOe1gmPe5as7-r7iwZ1ACTP15-jKgwyYvnEtfL'] = true,
-    ['u0EdSXBVymlC-Ql6VwW2RjDbh-EZIDJkqBlSZE'] = true,
-    ['UKQVc9RcVttO-DRnRSIfkjQ6y-ZQDuEFafFcUb'] = true,
-    ['uY7AWdo9zwi8-1lrcAvOFq9hd-Yytcc7qXKs88'] = true,
-    ['OoWYePB3I47a-IPNB4MnoH2Se-c4bSMMSBdhb2'] = true,
-    ['9TelLLj8zsvA-aYzCLHNPhpAK-WVRXzUUf5fBH'] = true,
-    ['0oCzSei0GLag-BAJYAxt6dO3x-sXdaeuV11o3c'] = true,
-    ['xZlIUeHFvaJZ-9ShPaMJXZz2y-s0GEvmI734Qy'] = true,
-    ['LgAHbqyQH4Xp-Vej9n8iNktym-pGijhn8Khj8l'] = true,
-    ['7rw412BOC6dG-AguLmDxiBZxG-bLitp1fhx82z'] = true,
-    ['edo0wTzAki10-OYhe87X0k1ef-KDq4ePEbhiKu'] = true,
-    ['4Ee7bD5rWQc4-fsV2OkEzvay7-lJFQD34z1sxX'] = true,
-    ['EYvJpLeZ2Yua-1eROqfYaTtdb-876lWjs4IESg'] = true,
-    ['0HJb4Pg8uhcJ-6HgbweGnp0oC-pAQBQgUoYEwN'] = true,
-    ['cFQnejt5waU5-jjkmQqJqWdOb-rq8FOR3tIMgd'] = true,
-    ['zWjBUxmYLMAr-qiyuz4a7WV2o-M3hxv5CfWWkd'] = true,
-    ['75Ski088ZHsM-VW60Z603kkeg-1V4mVrvh3slP'] = true,
-    ['FhizgWh0A0aE-2vDlRVmLN4Ki-V1iPSetcy9F4'] = true,
-    ['YCOYAitopcUV-9E3Vl9naHLpo-NFGChRzD2wXs'] = true,
-    ['Lhn8rRmGTIpo-IXbVp4eioGKI-qgCgBno3dk6e'] = true,
-    ['u47v4iCP6R4Z-CnRoypUWcE72-9xkJmEJgjMYm'] = true,
-    ['XN60CMMoNJzL-Gg63JY4mMMpo-5wmPgJPcVUxW'] = true,
-    ['TFAhCJVQlbri-B5Xuqyqx00vP-uEXRzGNvMMPM'] = true,
-    ['mgyq00cFiWiq-VKPhrZ50oqZT-camIjtyHiRhN'] = true,
-    ['QUZhrj0PL6TO-m8SfHmPJ0sRk-ZEDxv5i9C9oy'] = true,
-    ['IJL04Zi1IbaV-EqDVsMemBTnB-Blz0jPRZHCeB'] = true,
-    ['kjslKODfqCFh-SMzff7YzPtnC-hNN9e5WnpRjJ'] = true,
-}
 local Players = game:GetService("Players")
 local CoreGui = game:GetService("CoreGui")
 local TweenService = game:GetService("TweenService")
@@ -229,7 +126,7 @@ end)
 
 local unlocked = false
 local busy = false
-local API_URL = "https://YOUR-WORKER-URL.workers.dev"
+local API_URL = "https://tvlgqctztgdpyxeoeeaj.supabase.co/functions/v1/redeem-key"
 local SAVE_FILE = "Lightning_Redeemer_Auth.token"
 local HttpService = game:GetService("HttpService")
 
@@ -249,6 +146,37 @@ local function saveToken(token)
 end
 
 local function serverCall(path, body)
+    local req = getRequest()
+    if not req then
+        return false, "executor does not provide HTTP requests"
+    end
+
+    local ok, res = pcall(req, {
+        Url = API_URL,
+        Method = "POST",
+        Headers = {
+            ["Content-Type"] = "application/json"
+        },
+        Body = HttpService:JSONEncode(body),
+    })
+
+    if not ok or not res then
+        return false, "request failed"
+    end
+
+    local statusCode = res.StatusCode or res.Status or 0
+
+    local decoded = nil
+    pcall(function()
+        decoded = HttpService:JSONDecode(res.Body or "{}")
+    end)
+
+    if statusCode >= 200 and statusCode < 300 and decoded then
+        return true, decoded
+    end
+
+    return false, (decoded and decoded.error) or "unauthorized"
+end
     local req = getRequest()
     if not req then return false, "executor does not provide HTTP requests" end
     local ok, res = pcall(req, {
@@ -276,7 +204,10 @@ local function authenticateToken(token)
     return false
 end
 
-local function redeem()
+local ok, data = serverCall("", {
+    key = key,
+    userId = tostring(Players.LocalPlayer.UserId)
+})
     if busy then return end
     local key = box.Text:gsub("^%s+", ""):gsub("%s+$", "")
     if key == "" then
