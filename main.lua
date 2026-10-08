@@ -211,7 +211,6 @@ local ok, data = serverCall("", {
         status.TextColor3 = Color3.fromRGB(255, 105, 105)
         box.Text = ""
     end
-end
 
 button.MouseButton1Click:Connect(redeem)
 box.FocusLost:Connect(function(enter)
