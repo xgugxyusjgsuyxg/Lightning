@@ -178,10 +178,7 @@ local function serverCall(path, body)
     return false, (decoded and decoded.error) or "unauthorized"
 end
 
-local ok, data = serverCall("", {
-    key = key,
-    userId = tostring(Players.LocalPlayer.UserId)
-})
+local function redeem()
     if busy then return end
     local key = box.Text:gsub("^%s+", ""):gsub("%s+$", "")
     if key == "" then
