@@ -2407,10 +2407,5 @@ for i=1,#bytes do decoded[i]=string.char(bit32 and bit32.bxor(bytes[i],K[(i-1)%#
 local src=table.concat(decoded)
 local fn,err=loadstring(src)
 if not fn then error(err,0) end
-if type(writefile) == "function" then
-    writefile("Lightning_deobfuscated.lua", src)
-    print("Saved decoded source to Lightning_deobfuscated.lua")
-else
-    print(src)
-end
+return fn()
 
