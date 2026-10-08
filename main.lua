@@ -189,7 +189,11 @@ local function redeem()
     busy = true
     status.Text = "Checking key..."
     status.TextColor3 = Color3.fromRGB(255, 204, 45)
-    local ok, data = serverCall("/redeem", { key = key })
+    local ok, data = serverCall("/redeem", {
+    action = "redeem",
+    key = key,
+    userId = tostring(game.Players.LocalPlayer.UserId)
+})
     if ok and data.ok and data.token then
         saveToken(data.token)
         status.Text = "Key redeemed • Loading..."
