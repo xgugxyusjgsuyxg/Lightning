@@ -221,15 +221,31 @@ end)
 
 task.spawn(function()
     local token = readToken()
-    if token and authenticateToken(token) then
-        status.Text = "Saved authorization • Loading..."
-        status.TextColor3 = Color3.fromRGB(130, 255, 150)
-        task.wait(0.2)
-        finish()
+
+    if token then
+        local ok, data = serverCall("/auth", {
+            action = "auth",
+            token = token
+        })
+
+        if ok and data.ok then
+            unlocked = true
+            status.Text = "Saved authorization • Loading..."
+            status.TextColor3 = Color3.fromRGB(130, 255, 150)
+            task.wait(0.2)
+
+            gui:Destroy()
+
+            -- PUT YOUR MAIN LIGHTNING SCRIPT START HERE
+        end
     end
 end)
 
 repeat task.wait() until unlocked
+
+gui:Destroy()
+
+-- PUT YOUR MAIN LIGHTNING SCRIPT START HERE
 
 -- Obfuscated payload
 local K={65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65}
